@@ -9,7 +9,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     <?php
-       
+        
+        // Variabili
+        $passLength = $_GET['pass'];
+
+
+
+        function random_password($random){
+
+            if(($random % 2) || ($random % 3) || ($random % 5)){
+                $random_characters = $random;
+          
+                $lower_case = "abcdefghijklmnopqrstuvwxyz";
+                $upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                $numbers = "1234567890";
+                $symbols = "!@#$%^&*";
+              
+                $lower_case = str_shuffle($lower_case);
+                $upper_case = str_shuffle($upper_case);
+                $numbers = str_shuffle($numbers);
+                $symbols = str_shuffle($symbols);
+              
+                $random_password_tmp = substr($lower_case, 0, $random_characters);
+                $random_password_tmp .= substr($upper_case, 0, $random_characters);
+                $random_password_tmp .= substr($numbers, 0, $random_characters);
+                $random_password_tmp .= substr($symbols, 0, $random_characters);
+
+                $random_password_tmp = str_shuffle($random_password_tmp);
+
+                return var_dump(substr($random_password_tmp, 0, $random_characters));
+
+                //   substr($random_password_tmp, 0, $random_characters);
+            }
+
+         }
     ?>    
 </head>
 <body>
@@ -22,14 +55,20 @@
         </div>
         <div class="row">
             <div class="col">
+                <h1>password</h1>
+                <h4><?php echo random_password($passLength) ?></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <!-- Inizio form -->
                 <form>
                     <div class="row row-cols mb-3">
                         <div class="col">
-                            <label for="inputPassword3" class="col-form-label">Lunghezza password:</label>
+                            <label for="passInput" class="col-form-label">Lunghezza password:</label>
                         </div>
                         <div class="col">
-                            <input type="password" class="form-control" id="inputPassword3">
+                            <input type="text" class="form-control" id="passInput" placeholder="Inserisci la lunghezza della password" name="pass" value="">
                         </div>
                     </div>
                     <fieldset class="row row-cols-2 mb-3 ">
